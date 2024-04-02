@@ -59,5 +59,17 @@ pipeline {
                 war: 'target/*.war'
             }
         }
+
+        stage('Slack Notification') {
+            steps {
+                slackSend channel: 'jenkins-slack-notification', 
+                color: 'yellow', 
+                message: 'Congratulation, build successful', 
+                notifyCommitters: true, 
+                teamDomain: 'DevOps-010624', 
+                tokenCredentialId: 'JSN'
+            }
+        }
+
     }
 }
