@@ -33,5 +33,21 @@ pipeline {
               }
             }
         }
+
+        stage('Deploy to Nexus') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'earth-app', 
+                classifier: '', 
+                file: 'target/earth-app-1.0-SNAPSHOT.war', 
+                type: 'war']], 
+                credentialsId: 'TOMCAT', 
+                groupId: 'com.devops.maven', 
+                nexusUrl: '54.209.142.137:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: '54.209.142.137:8081', 
+                version: '1.0-SNAPSHOT'
+            }
+        }
     }
 }
