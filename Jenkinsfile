@@ -38,14 +38,14 @@ pipeline {
             steps {
                 nexusArtifactUploader artifacts: [[artifactId: 'earth-app', 
                 classifier: '', 
-                file: '/var/lib/jenkins/workspace/Earth_App_Project/target/earth-app-1.0-SNAPSHOT.war', 
+                file: 'target/earth-app-1.0-SNAPSHOT.war', 
                 type: 'war']], 
                 credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
                 nexusUrl: '54.209.142.137:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: '54.209.142.137:8081', 
+                repository: 'EarthApp-Snapshot', 
                 version: '1.0-SNAPSHOT'
             }
         }
