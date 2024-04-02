@@ -40,7 +40,7 @@ pipeline {
                 classifier: '', 
                 file: 'target/earth-app-1.0-SNAPSHOT.war', 
                 type: 'war']], 
-                credentialsId: 'TOMCAT', 
+                credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
                 nexusUrl: '54.209.142.137:8081', 
                 nexusVersion: 'nexus3', 
