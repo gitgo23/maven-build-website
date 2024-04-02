@@ -60,7 +60,11 @@ pipeline {
             }
         }
 
-        stage('Slack Notification') {
+        
+
+    }
+
+    stage('Slack Notification') {
             steps {
                 slackSend channel: 'jenkins-slack-notification', 
                 color: 'yellow', 
@@ -70,6 +74,4 @@ pipeline {
                 tokenCredentialId: 'JSN'
             }
         }
-
-    }
 }
