@@ -38,7 +38,7 @@ pipeline {
             steps {
                 nexusArtifactUploader artifacts: [[artifactId: 'earth-app', 
                 classifier: '', 
-                file: 'target/earth-app-1.0-SNAPSHOT.war', 
+                file: '/var/lib/jenkins/workspace/Earth_App_Project/target/earth-app-1.0-SNAPSHOT.war', 
                 type: 'war']], 
                 credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
