@@ -1,3 +1,8 @@
+def COLOUR_MAP = [
+    'FAILURE' = 'danger'
+    'SUCCESS' = 'good'
+]
+
 pipeline {
     agent any
 
@@ -60,16 +65,19 @@ pipeline {
             }
         }
 
-        stage('Slack Notification') {
-            steps {
-                slackSend channel: 'jenkins-slack-notification', 
-                color: 'yellow', 
-                message: 'Congratulation, build successful', 
-                notifyCommitters: true, 
-                teamDomain: 'DevOps-010624', 
-                tokenCredentialId: 'JSN'
-            }
-        }
+
 
     }
+
+    post {
+    always {
+        echo 'Slack Notifications'
+        slackSend (
+            channel: 'jenkins-slack-notification', 
+            color: COLOUR_MAP[currentBuild.currentResult], 
+            message: "${currentBuild.currentResult}: Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        )
+    }
+}
+
 }
