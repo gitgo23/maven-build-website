@@ -42,7 +42,7 @@ pipeline {
                 type: 'war']], 
                 credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
-                nexusUrl: '54.209.142.139:8081', 
+                nexusUrl: '54.209.142.137:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'EarthApp-Snapshot', 
@@ -60,11 +60,7 @@ pipeline {
             }
         }
 
-        
-
-    }
-
-    stage('Slack Notification') {
+        stage('Slack Notification') {
             steps {
                 slackSend channel: 'jenkins-slack-notification', 
                 color: 'yellow', 
@@ -74,4 +70,6 @@ pipeline {
                 tokenCredentialId: 'JSN'
             }
         }
+
+    }
 }
