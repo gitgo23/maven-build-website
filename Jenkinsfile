@@ -55,7 +55,7 @@ pipeline {
                 nexusUrl: '52.72.27.240:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: 'EarthApp-Release', 
+                repository: 'EarthApp-Snapshot', 
                 version: '1.0-SNAPSHOT'
             }
         }
