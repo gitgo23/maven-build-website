@@ -81,16 +81,14 @@ pipeline {
 
     }
 
-    post {
-        always {
-            echo 'Sending log file'
-            slackUploadFile(
-                    file: "${env.BUILD_LOG}",
-                    initialComment: 'Build Log',
-                    channels: 'team5-africa',
-            )
-        }
 
-    }
 }
+
+slackUploadFile(
+    file: env.BUILD_LOG,
+    initialComment: 'Build Log',
+    channels: 'team5-africa',
+)
+
+
 
