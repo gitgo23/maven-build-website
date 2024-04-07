@@ -80,7 +80,7 @@ pipeline {
         }
 
         slackUploadFile(
-            file: "${BUILD_LOG}",
+            file: "${env.BUILD_LOG}",
             initialComment: 'Build Log',
             channels: 'team5-africa',
         )
