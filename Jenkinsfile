@@ -43,6 +43,22 @@ pipeline {
               }
             }
         }
+
+        stage('Deploy Build Artifact') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'earth-app', 
+                classifier: '', 
+                file: 'target/earth-app-1.0-SNAPSHOT.war', 
+                type: 'war']], 
+                credentialsId: 'NEXUS_CRED', 
+                groupId: 'com.devops.maven', 
+                nexusUrl: '52.72.27.240:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: 'EarthApp-Release', 
+                version: '1.0-SNAPSHOT'
+            }
+        }
     }
 
     post {
