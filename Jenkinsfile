@@ -79,11 +79,18 @@ pipeline {
                       message: "${currentBuild.currentResult}: Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
 
-        slackUploadFile(
-            file: "${env.BUILD_LOG}",
-            initialComment: 'Build Log',
-            channels: 'team5-africa',
-        )
+    }
+
+    post {
+        always {
+            echo 'Sending log file'
+            slackUploadFile(
+                    file: "${env.BUILD_LOG}",
+                    initialComment: 'Build Log',
+                    channels: 'team5-africa',
+            )
+        }
 
     }
 }
+
