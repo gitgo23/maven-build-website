@@ -1,3 +1,8 @@
+COLOR_MAP = [
+    'SUCCESS': 'good',
+    'FAILURE': 'danger',
+]
+
 pipeline {
     agent any
 
@@ -24,11 +29,20 @@ pipeline {
             }
             steps {
                 script {
-                    withSonarQubeEnv('Sonarqube') {
-                        sh "${ScannerHome}/bin/sonar-scanner -Dsonar.projectKey=Earth"
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${ScannerHome}/bin/sonar-scanner -Dsonar.projectKey=Earth_App"
                     }
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Slack Notifications'
+            slackSend channel: 'team5-africa', 
+                      color: COLOR_MAP[currentBuild.currentResult],
+                      message: "${currentBuild.currentResult}: Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }
