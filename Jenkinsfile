@@ -52,7 +52,7 @@ pipeline {
                 type: 'war']], 
                 credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
-                nexusUrl: '52.72.27.240:8081', 
+                nexusUrl: '3.85.141.70:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'EarthApp-Snapshot', 
@@ -62,9 +62,9 @@ pipeline {
 
          stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'TOMCAT_CRED', 
+                deploy adapters: [tomcat9(credentialsId: 'TOM_CRED', 
                 path: '', 
-                url: 'http://54.175.35.186:8080/')], 
+                url: 'http://54.86.176.86:8080/')], 
                 contextPath: null, 
                 war: 'target/*.war'
             }
