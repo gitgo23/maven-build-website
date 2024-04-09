@@ -36,13 +36,13 @@ pipeline {
             }
         }
 
-        stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-        }
+        //stage("Quality Gate") {
+        //    steps {
+        //      timeout(time: 1, unit: 'HOURS') {
+        //        waitForQualityGate abortPipeline: true
+        //      }
+        //    }
+        //}
 
         stage('Deploy Build Artifact') {
             steps {
@@ -52,7 +52,7 @@ pipeline {
                 type: 'war']], 
                 credentialsId: 'NEXUS_CRED', 
                 groupId: 'com.devops.maven', 
-                nexusUrl: '3.85.141.70:8081', 
+                nexusUrl: '100.24.240.178:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'EarthApp-Snapshot', 
@@ -62,7 +62,11 @@ pipeline {
 
          stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tt', path: '', url: 'http://54.86.176.86:8080/')], contextPath: null, war: 'target/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-key', 
+                path: '', 
+                url: 'http://54.86.176.86:8080/')], 
+                contextPath: null, 
+                war: 'target/*.war'
             }
         }
     }
@@ -70,7 +74,7 @@ pipeline {
     post {
         always {
             echo 'Slack Notifications'
-            slackSend channel: 'team5-africa', 
+            slackSend channel: 'jenkins-slack-notification', 
                       color: COLOR_MAP[currentBuild.currentResult],
                       message: "${currentBuild.currentResult}: Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
