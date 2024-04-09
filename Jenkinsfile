@@ -81,6 +81,16 @@ pipeline {
 
     }
 
+    post {
+        always {
+            // Send email notification
+            emailext subject: "Pipeline ${currentBuild.result}: ${env.JOB_NAME}",
+                      body: "Build ${env.BUILD_NUMBER} ${currentBuild.result}\n\nCheck console output at: ${env.BUILD_URL}",
+                      to: "www.gyenoch@gmail.com, enoch3054@gmail.com",
+                      attachLog: true
+        }
+    }
+
 
 }
 
