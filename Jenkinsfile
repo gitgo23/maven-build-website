@@ -25,7 +25,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             environment {
-                ScannerHome = tool 'SonarQ-6'
+                ScannerHome = tool 'Sonar-5'
             }
             steps {
                 script {
