@@ -16,5 +16,18 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+
+        stage('SonarQube Analysis') {
+            environment {
+                ScannerHome = tool 'Sonar-5'
+            }
+            steps {
+                script {
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${ScannerHome}/bin/sonar-scanner -Dsonar.projectKey=Earth_App"
+                    }
+                }
+            }
+        }
     }
 }
