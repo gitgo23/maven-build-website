@@ -45,5 +45,15 @@ pipeline {
                 version: '1.0-SNAPSHOT'
             }
         }
+
+        stage('TOMCAT') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: 'TOMCAT_CRED', 
+                path: '', 
+                url: 'http://100.26.195.246:8080/')], 
+                contextPath: null, 
+                war: 'target/*.war'
+            }
+        }
     }
 }
