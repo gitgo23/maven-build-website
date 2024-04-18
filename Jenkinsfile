@@ -21,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t gyenoch/maven-build-website:latest ."
-            }
+            } 
         }
 
         stage('Docker Push') {
@@ -31,6 +31,12 @@ pipeline {
                         sh "docker push gyenoch/maven-build-website:latest"
                     }
                 }
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                sh "docker run -d -p 9090:8080 gyenoch/maven-build-website:latest"
             }
         }
     }
