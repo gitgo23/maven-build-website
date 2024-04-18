@@ -17,5 +17,21 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t gyenoch/maven-build-website:latest ."
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'Docker-cred') {
+                        sh "docker push gyenoch/maven-build-website:latest"
+                    }
+                }
+            }
+        }
     }
 }
