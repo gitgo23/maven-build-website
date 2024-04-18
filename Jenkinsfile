@@ -14,11 +14,7 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
-                sh '''
-                "echo Starting Clean Packaging"
-                "mvn clean package"
-                "echo Clean Packaging Success"
-                '''
+                sh "mvn clean package"
             }
         }
     }
